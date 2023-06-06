@@ -58,15 +58,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 // Calculate volatility
+                var supply = 19390000
                 var volatility = math.std(logReturns) * math.sqrt(86400);
                 fetch('https://api.coingecko.com/api/v3/coins/bitcoin')
                     .then(response => response.json())
                     .then(data => {
-                        var supply = data.market_data.circulating_supply;
+                        if (supply !== undefined) {
+                            supply = data.market_data.circulating_supply;
+
+                        }
                     })
                     .catch(error => console.error('Error:', error));
-                const marketCap = parseFloat(newData2.lastPrice) * supply;
-
+                const marketCap = parseFloat(newData[newData.length - 1][4]) * supply;
 
                 // Update metric values in the table
                 document.getElementById("volumeValue").textContent = volume.toFixed(2);
@@ -89,61 +92,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateData(startTime);
 });
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     var dataPoints = [];
-
-//     var chart = new CanvasJS.Chart("chartContainer", {
-//         title: {
-//             text: "Live chart with BTC-USDT"
-//         },
-//         data: [{
-//             type: "line",
-//             dataPoints: dataPoints
-//         }]
-//     });
-
-//     function updateData(startTime, endTime) {
-//         var url = `https://api.binance.us/api/v3/klines?symbol=BTCUSDT&interval=1s&startTime=${startTime}&endTime=${endTime}`;
-//         console.log(url)
-//         fetch(url)
-//             .then(response => response.json())
-//             .then(data => {
-//                 var newData = data;
-//                 console.log(newData)
-//                 var dataPoints = [];
-
-//                 for (var i = 0; i < newData.length; i++) {
-//                     dataPoints.push({
-//                         x: new Date(newData[i][0]),
-//                         y: parseFloat(newData[i][4])
-//                     });
-
-//                     if (dataPoints.length > newData.length) {
-//                         dataPoints.shift();
-//                     }
-//                 }
-
-//                 chart.options.data[0].dataPoints = dataPoints;
-//                 chart.render();
-//                 setTimeout(() => {
-//                     // Update the start and end times for the next fetch
-//                     var newStartTime = newData[newData.length - 1][0] + 1;
-//                     var newEndTime = endTime + (newData.length * 1000);
-
-//                     // updateData(newStartTime, newEndTime);
-//                 }, 1000);
-//             })
-//             .catch(error => console.error('Error:', error));
-//     }
-
-//     // Specify the initial start and end times
-//     var startTime = Date.now() - (24 * 60 * 60 * 1000); // 24 hours ago
-//     console.log("start", startTime)
-//     var endTime = Date.now(); // Current time
-//     console.log("end", endTime)
-
-//     updateData(startTime, endTime);
-
-
-// });
