@@ -13,9 +13,39 @@
         <div id="chartContainer" style="height: 300px; width: 100%;"></div>
         <div id="dataContainer"></div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
     <script src="script.js"></script>
+    <div id="dataContainer">
+        <table id="metricsTable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Metrics</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>24hr Volume</td>
+                    <td id="volumeValue"></td>
+                </tr>
+                <tr>
+                    <td>24hr Price Change (%)</td>
+                    <td id="priceChangeValue"></td>
+                </tr>
+                <tr>
+                    <td>24hr Volatility</td>
+                    <td id="volatilityValue"></td>
+                </tr>
+                <tr>
+                    <td>Market Cap</td>
+                    <td id="marketCapValue"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </body>
 
 </html>

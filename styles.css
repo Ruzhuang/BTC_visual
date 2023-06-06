@@ -1,3 +1,10 @@
 body {
     padding-top: 20px;
 }
+
+.table {
+    width: 80%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
